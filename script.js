@@ -654,8 +654,12 @@ function drop(e) {
                     }
 
                     // castle
-                    if(id[1] == 'k' && (draggable.parentElement.id[3] == 2 || draggable.parentElement.id[3] == 6)) {
-                        console.log('bom dia');
+                    /*PAREI AQUI---------------------------------------*/
+                    if(id[1] == 'k' && draggable.parentElement.id[3] == 2) {
+                        
+                    } else if(id[1] == 'k' && draggable.parentElement.id[3] == 6) {
+                        document.querySelector('#sq-3').appendChild('#wr0');
+                        contMove(document.querySelector('#sq-3'));
                     }
     
                     totalMoves++;
