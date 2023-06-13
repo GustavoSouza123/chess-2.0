@@ -85,7 +85,7 @@ function genLetterCoords(coord) {
 // tirar background dos quadrados (movimentos legais)
 function cleanLegalMoves() {
 	for(j = 0; j < square.length; j++) {
-		square[j].classList.remove('bg_red');
+		square[j].classList.remove('bg_legal_move');
 	}
 }
 
@@ -460,6 +460,7 @@ function genLegalMoves(pc) {
         rank = initialRank;
         file = initialFile;
 
+        // castle
         if(col == 'w') {
             if(whitePiecesMoves[5] == 0 && whitePiecesMoves[1][0] == 0) {
                 legalMoves.push((rank-2).toString()+file.toString());
@@ -482,7 +483,7 @@ function genLegalMoves(pc) {
     for(k = 0; k < legalMoves.length; k++) {
         for(l = 0; l < square.length; l++) {
             if(square[l].classList[1] == genLetterCoords(legalMoves[k])) {
-                square[l].classList.add('bg_red');
+                square[l].classList.add('bg_legal_move');
             }
         }
     }
@@ -621,11 +622,6 @@ function drop(e) {
         block(id);
     } else {
         if(totalMoves % 2 == 0) {
-            /* ********** PAREI AQUI */
-            if(id[1] == 'k' && (draggable.parentElement.id[3] == 2 || draggable.parentElement.id[3] == 6)) {
-                console.log('bom dia');
-            }
-            /* ********** */
             if(color == 'w') {
                 let isLegal = false;
                 for(m = 0; m < legalMoves.length; m++) {
@@ -655,6 +651,11 @@ function drop(e) {
                         dropTarget = e.target.classList[1];
                         e.target.appendChild(draggable);
                         contMove(draggable);
+                    }
+
+                    // castle
+                    if(id[1] == 'k' && (draggable.parentElement.id[3] == 2 || draggable.parentElement.id[3] == 6)) {
+                        console.log('bom dia');
                     }
     
                     totalMoves++;
@@ -698,6 +699,11 @@ function drop(e) {
                         dropTarget = e.target.classList[1];
                         e.target.appendChild(draggable);
                         contMove(draggable);
+                    }
+
+                    // castle
+                    if(id[1] == 'k' && ((draggable.parentElement.id[3] == 6 && draggable.parentElement.id[4] == 2) || (draggable.parentElement.id[3] == 5 && draggable.parentElement.id[4] == 8))) {
+                        console.log('bom dia');
                     }
     
                     totalMoves++;
